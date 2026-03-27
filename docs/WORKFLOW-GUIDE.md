@@ -4,7 +4,8 @@
 >
 > This guide walks you through every phase of game development using the
 > 48-agent system, 37 slash commands, and automated hooks. It assumes you
-> have Claude Code installed and are working from the project root.
+> have Codex or Claude Code installed and are working from the project root.
+> If you are using Codex, run the sync step in `docs/CODEX-SETUP.md` first.
 
 ---
 

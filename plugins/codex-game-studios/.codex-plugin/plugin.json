@@ -1,0 +1,18 @@
+{
+  "name": "codex-game-studios",
+  "version": "1.0.0",
+  "description": "Codex-compatible packaging of the CodeX Game Studios slash-command workflow.",
+  "skills": "./skills",
+  "interface": {
+    "displayName": "CodeX Game Studios",
+    "shortDescription": "Game studio workflows for Codex with Claude-compatible slash commands",
+    "longDescription": "Adds the CodeX Game Studios command set to Codex while preserving the original Claude command names and workflow structure.",
+    "developerName": "Local Repository Plugin",
+    "category": "Developer Tools",
+    "defaultPrompt": [
+      "Run /start to onboard a new game project.",
+      "Use /setup-engine godot 4.6 to configure the repo.",
+      "Use /team-combat to coordinate a combat feature."
+    ]
+  }
+}

@@ -1,7 +1,7 @@
 <p align="center">
-  <h1 align="center">Claude Code Game Studios</h1>
+  <h1 align="center">CodeX Game Studios</h1>
   <p align="center">
-    Turn a single Claude Code session into a full game development studio.
+    Turn a single Codex or Claude Code session into a full game development studio.
     <br />
     48 agents. 37 workflows. One coordinated AI team.
   </p>
@@ -13,7 +13,9 @@
   <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-37-green" alt="37 Skills"></a>
   <a href=".claude/hooks"><img src="https://img.shields.io/badge/hooks-8-orange" alt="8 Hooks"></a>
   <a href=".claude/rules"><img src="https://img.shields.io/badge/rules-11-red" alt="11 Rules"></a>
+  <a href="AGENTS.md"><img src="https://img.shields.io/badge/entrypoint-AGENTS.md-10a37f" alt="Codex Entrypoint"></a>
   <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/built%20for-Claude%20Code-f5f5f5?logo=anthropic" alt="Built for Claude Code"></a>
+  <a href="docs/CODEX-SETUP.md"><img src="https://img.shields.io/badge/built%20for-Codex-10a37f" alt="Built for Codex"></a>
   <a href="https://ko-fi.com/donchitos"><img src="https://img.shields.io/badge/Ko--fi-Support%20this%20project-ff5e5b?logo=ko-fi&logoColor=white" alt="Ko-fi"></a>
 </p>
 
@@ -23,7 +25,7 @@
 
 Building a game solo with AI is powerful — but a single chat session has no structure. No one stops you from hardcoding magic numbers, skipping design docs, or writing spaghetti code. There's no QA pass, no design review, no one asking "does this actually fit the game's vision?"
 
-**Claude Code Game Studios** solves this by giving your AI session the structure of a real studio. Instead of one general-purpose assistant, you get 48 specialized agents organized into a studio hierarchy — directors who guard the vision, department leads who own their domains, and specialists who do the hands-on work. Each agent has defined responsibilities, escalation paths, and quality gates.
+**CodeX Game Studios** solves this by giving your AI session the structure of a real studio. Instead of one general-purpose assistant, you get 48 specialized agents organized into a studio hierarchy — directors who guard the vision, department leads who own their domains, and specialists who do the hands-on work. Each agent has defined responsibilities, escalation paths, and quality gates.
 
 The result: you still make every decision, but now you have a team that asks the right questions, catches mistakes early, and keeps your project organized from first brainstorm to launch.
 
@@ -92,7 +94,7 @@ The template includes agent sets for all three major engines. Use the set that m
 
 ## Slash Commands
 
-Type `/` in Claude Code to access all 37 skills:
+Type `/` in Codex or Claude Code to access all 37 skills. The command names are identical in both environments:
 
 **Reviews & Analysis**
 `/design-review` `/code-review` `/balance-check` `/asset-audit` `/scope-check` `/perf-profile` `/tech-debt`
@@ -117,6 +119,7 @@ Type `/` in Claude Code to access all 37 skills:
 ### Prerequisites
 
 - [Git](https://git-scm.com/)
+- [Codex CLI](https://github.com/openai/codex) or another Codex-compatible client
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (`npm install -g @anthropic-ai/claude-code`)
 - **Recommended**: [jq](https://jqlang.github.io/jq/) (for hook validation) and Python 3 (for JSON validation)
 
@@ -130,18 +133,38 @@ All hooks fail gracefully if optional tools are missing — nothing breaks, you 
    cd my-game
    ```
 
-2. **Open Claude Code** and start a session:
+2. **If you use Codex, sync the Codex skill mirror once**:
+   ```powershell
+   powershell -ExecutionPolicy Bypass -File .\tools\codex\sync-codex.ps1 -InstallUserSkills
+   ```
+
+   Or on macOS/Linux:
+   ```bash
+   bash ./tools/codex/sync-codex.sh --install-user-skills
+   ```
+
+   This keeps the original slash command names while making them discoverable by Codex.
+   The repo also ships a local plugin at `plugins/codex-game-studios/` for repo-scoped usage.
+
+3. **Open Codex or Claude Code** and start a session:
+   ```bash
+   codex
+   ```
+
+   or:
    ```bash
    claude
    ```
 
-3. **Run `/start`** — the system asks where you are (no idea, vague concept,
+4. **Run `/start`** — the system asks where you are (no idea, vague concept,
    clear design, existing work) and guides you to the right workflow. No assumptions.
 
    Or jump directly to a specific skill if you already know what you need:
    - `/brainstorm` — explore game ideas from scratch
    - `/setup-engine godot 4.6` — configure your engine if you already know
    - `/project-stage-detect` — analyze an existing project
+
+For Codex-specific details, see [docs/CODEX-SETUP.md](docs/CODEX-SETUP.md).
 
 ## Upgrading
 
@@ -152,7 +175,9 @@ versions, and which files are safe to overwrite vs. which need a manual merge.
 ## Project Structure
 
 ```
-CLAUDE.md                           # Master configuration
+AGENTS.md                           # Codex entrypoint
+CLAUDE.md                           # Claude entrypoint
+.agents/plugins/marketplace.json    # Repo-local Codex plugin registry
 .claude/
   settings.json                     # Hooks, permissions, safety rules
   agents/                           # 48 agent definitions (markdown + YAML frontmatter)
@@ -165,12 +190,15 @@ CLAUDE.md                           # Master configuration
     agent-coordination-map.md       # Delegation and escalation paths
     setup-requirements.md           # Prerequisites and platform notes
     templates/                      # 28 document templates
+plugins/
+  codex-game-studios/              # Codex plugin packaging for the same 37 commands
+tools/
+  codex/                           # Codex sync/install scripts
 src/                                # Game source code
 assets/                             # Art, audio, VFX, shaders, data files
 design/                             # GDDs, narrative docs, level designs
 docs/                               # Technical documentation and ADRs
 tests/                              # Test suites
-tools/                              # Build and pipeline tools
 prototypes/                         # Throwaway prototypes (isolated from src/)
 production/                         # Sprint plans, milestones, release tracking
 ```

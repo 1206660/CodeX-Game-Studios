@@ -1,5 +1,7 @@
 # Claude Code Game Studios -- Game Studio Agent Architecture
 
+> Codex users should start from `AGENTS.md`. This file remains as the Claude-compatible entrypoint.
+
 Indie game development managed through 48 coordinated Claude Code subagents.
 Each agent owns a specific domain, enforcing separation of concerns and quality.
 
