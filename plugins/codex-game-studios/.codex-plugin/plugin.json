@@ -1,12 +1,12 @@
 {
   "name": "codex-game-studios",
   "version": "1.0.0",
-  "description": "Codex-compatible packaging of the CodeX Game Studios slash-command workflow.",
+  "description": "Codex-compatible packaging of the CodeX Game Studios slash-command workflow, including Codex CLI support.",
   "skills": "./skills",
   "interface": {
     "displayName": "CodeX Game Studios",
-    "shortDescription": "Game studio workflows for Codex with Claude-compatible slash commands",
-    "longDescription": "Adds the CodeX Game Studios command set to Codex while preserving the original Claude command names and workflow structure.",
+    "shortDescription": "Game studio workflows for CodeX and Codex CLI with Claude-compatible slash commands",
+    "longDescription": "Adds the CodeX Game Studios command set to Codex-compatible clients, including Codex CLI, while preserving the original Claude command names and workflow structure.",
     "developerName": "Local Repository Plugin",
     "category": "Developer Tools",
     "defaultPrompt": [

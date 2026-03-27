@@ -3,6 +3,10 @@
 This repository packages the original Claude-first studio template so it can be
 used from Codex without changing the slash command names.
 
+In this repository, `Codex` is the umbrella term for CodeX support plus
+`Codex CLI` support. When a step only applies to the terminal client, the docs
+say `Codex CLI` explicitly.
+
 ## Entry Points
 
 - `AGENTS.md` is the Codex project entrypoint.
@@ -32,7 +36,7 @@ the current user's Codex skill directory.
 - Coding standards: `.claude/docs/coding-standards.md`
 - Context management: `.claude/docs/context-management.md`
 - Workflow guide: `docs/WORKFLOW-GUIDE.md`
-- Codex setup: `docs/CODEX-SETUP.md`
+- Codex and Codex CLI setup: `docs/CODEX-SETUP.md`
 
 ## Collaboration Protocol
 

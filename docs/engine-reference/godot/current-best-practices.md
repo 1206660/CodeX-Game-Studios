@@ -1,101 +1,29 @@
-# Godot — Current Best Practices
+# Current Best Practices For Godot 4.6.1
 
-Last verified: 2026-02-12 | Engine: Godot 4.6
+Last verified: 2026-03-28
 
-Practices that are **new or changed** since the model's training data (~4.3).
-This supplements (not replaces) the agent's built-in knowledge.
+## General
 
-## GDScript (4.5+)
+- Treat 4.6.1 as a version-aware project. Read the migration notes before trusting older snippets from 4.3 or earlier.
+- When upgrading existing projects to 4.6, use the editor's project file upgrade tooling before committing scene-file rewrites.
 
-- **Variadic arguments**: Functions can accept arbitrary parameter counts
-  ```gdscript
-  func log_values(prefix: String, values: Variant...) -> void:
-      for v in values:
-          print(prefix, ": ", v)
-  ```
+## GDScript
 
-- **Abstract classes and methods**: Use `@abstract` to enforce inheritance
-  ```gdscript
-  @abstract
-  class_name BaseEnemy extends CharacterBody3D
+- Godot 4.5 added variadic arguments with `...`. Use them only when the call site becomes clearer than array or dictionary parameters.
+- Godot 4.5 added `@abstract` support. Use it to tighten shared contracts, but avoid abstract hierarchies in prototype code where composition remains simpler.
+- Script backtraces are available in release builds in 4.5+, so production crash diagnostics can preserve more context than older Godot examples imply.
 
-  @abstract
-  func get_attack_pattern() -> Array[Attack]:
-      pass  # Subclasses MUST override
-  ```
+## C# / Mono
 
-- **Script backtracing**: Detailed call stacks available even in Release builds
+- If this project uses C#, standardize on .NET 8 or newer.
+- Recheck any C# wrappers around file dialogs or editor tooling because 4.6 moved several members to the base `FileDialog` type.
 
-## Physics (4.6)
+## 2D Rendering
 
-- **Jolt Physics is the default 3D engine** for new projects
-  - Better determinism and stability than GodotPhysics3D
-  - Some HingeJoint3D properties (`damp`) only work with GodotPhysics
-  - Switch: Project Settings → Physics → 3D → Physics Engine
-  - 2D physics unchanged (still Godot Physics 2D)
+- Re-tune glow intentionally on 4.6. The default blend behavior changed and can make older 2D post-processing recipes look washed out.
+- Favor silhouette clarity over layered shader novelty for this project's doodle art.
 
-## Rendering (4.6)
+## Gameplay Systems
 
-- **D3D12 is the default backend on Windows** (was Vulkan) — for better driver compatibility
-- **Glow now processes before tonemapping** with screen blending mode — existing glow setups may look different
-- **SSR overhauled** — significant improvement in realism, stability, and performance
-- **AgX tonemapper** — new white point and contrast controls
-
-## Rendering (4.5)
-
-- **Shader Baker**: Pre-compile shaders to eliminate startup hitching
-- **SMAA 1x**: New AA option — sharper than FXAA, cheaper than TAA
-- **Stencil buffer**: Available for advanced masking/portal effects
-- **Bent normal maps**: Directional occlusion in normal map textures
-- **Specular occlusion**: Ambient occlusion now affects reflections
-
-## Accessibility (4.5+)
-
-- **Screen reader support**: Control nodes integrate with accessibility tools via AccessKit
-- **Live translation preview**: Test GUI layouts in different languages directly in-editor
-- **FoldableContainer**: New accordion-style UI node for collapsible sections
-- **Recursive Control disable**: Disable mouse/focus interactions for entire node hierarchies with a single property
-
-## Animation (4.5+)
-
-- **BoneConstraint3D**: Bind bones to other bones with modifiers
-  - AimModifier3D, CopyTransformModifier3D, ConvertTransformModifier3D
-
-## Animation (4.6)
-
-- **IK system fully restored**: Complete inverse kinematics reintroduced for 3D
-  - Available modifiers: CCDIK, FABRIK, Jacobian IK, Spline IK, TwoBoneIK
-  - Applied via `SkeletonModifier3D` nodes
-
-## Resources (4.5+)
-
-- **`duplicate_deep()`**: Explicit deep duplication for nested resource trees
-  - Old `duplicate()` behavior retained for backward compatibility
-  - Use `duplicate_deep()` when you need per-instance copies of nested resources
-
-## Navigation (4.5+)
-
-- **Dedicated 2D navigation server**: No longer proxied through 3D NavigationServer
-  - Reduces export binary size for 2D-only games
-
-## UI (4.6)
-
-- **Dual-focus system**: Mouse/touch focus is now separate from keyboard/gamepad focus
-  - Visual feedback differs depending on input method
-  - Consider this when designing custom focus behavior
-
-## Editor Workflow (4.6)
-
-- Flexible dock drag-and-drop with blue outline preview (including bottom panel)
-- Most panels support floating windows (except Debugger)
-- New keyboard shortcuts: Alt+O (Output), Alt+S (Shader)
-- Export variable auto-generation: drag resource from FileSystem into script editor
-- Live preview in Quick Open dialog when "Live Preview" enabled
-- New "Select Mode" (v key) prevents accidental transforms; old mode renamed "Transform Mode" (q key)
-
-## Platform (4.5+)
-
-- **visionOS export**: First new platform since open-sourcing (windowed app mode)
-- **SDL3 gamepad driver**: Better cross-platform gamepad support
-- **Android**: Edge-to-edge display, camera feed access, 16KB page support (Android 15+)
-- **Linux**: Wayland subwindow support for multi-window capability
+- If pathfinding enters the project later, handle empty `AStar` or `AStarGrid` results directly rather than assuming a nearest valid fallback.
+- If exact TileMap body coordinates matter, set `physics_quadrant_size = 1` instead of relying on pre-4.5 behavior.

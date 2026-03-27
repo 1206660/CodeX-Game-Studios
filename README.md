@@ -1,7 +1,7 @@
 <p align="center">
   <h1 align="center">CodeX Game Studios</h1>
   <p align="center">
-    Turn a single Codex or Claude Code session into a full game development studio.
+    Turn a single Codex, Codex CLI, or Claude Code session into a full game development studio.
     <br />
     48 agents. 37 workflows. One coordinated AI team.
   </p>
@@ -28,6 +28,14 @@ Building a game solo with AI is powerful — but a single chat session has no st
 **CodeX Game Studios** solves this by giving your AI session the structure of a real studio. Instead of one general-purpose assistant, you get 48 specialized agents organized into a studio hierarchy — directors who guard the vision, department leads who own their domains, and specialists who do the hands-on work. Each agent has defined responsibilities, escalation paths, and quality gates.
 
 The result: you still make every decision, but now you have a team that asks the right questions, catches mistakes early, and keeps your project organized from first brainstorm to launch.
+
+---
+
+## Terminology
+
+In this repository, **`Codex` means support for both CodeX and `Codex CLI`**.
+When a step only applies to the terminal client, the docs say **`Codex CLI`**
+explicitly. Otherwise, read `Codex` as the shared compatibility layer.
 
 ---
 
@@ -94,7 +102,7 @@ The template includes agent sets for all three major engines. Use the set that m
 
 ## Slash Commands
 
-Type `/` in Codex or Claude Code to access all 37 skills. The command names are identical in both environments:
+Type `/` in Codex CLI or Claude Code to access all 37 skills. The command names are identical in both environments:
 
 **Reviews & Analysis**
 `/design-review` `/code-review` `/balance-check` `/asset-audit` `/scope-check` `/perf-profile` `/tech-debt`
@@ -133,7 +141,7 @@ All hooks fail gracefully if optional tools are missing — nothing breaks, you 
    cd my-game
    ```
 
-2. **If you use Codex, sync the Codex skill mirror once**:
+2. **If you use Codex CLI or another Codex-compatible client, sync the Codex skill mirror once**:
    ```powershell
    powershell -ExecutionPolicy Bypass -File .\tools\codex\sync-codex.ps1 -InstallUserSkills
    ```
@@ -143,10 +151,10 @@ All hooks fail gracefully if optional tools are missing — nothing breaks, you 
    bash ./tools/codex/sync-codex.sh --install-user-skills
    ```
 
-   This keeps the original slash command names while making them discoverable by Codex.
+   This keeps the original slash command names while making them discoverable by Codex-compatible clients, including Codex CLI.
    The repo also ships a local plugin at `plugins/codex-game-studios/` for repo-scoped usage.
 
-3. **Open Codex or Claude Code** and start a session:
+3. **Open Codex CLI, another Codex-compatible client, or Claude Code** and start a session:
    ```bash
    codex
    ```
@@ -164,7 +172,7 @@ All hooks fail gracefully if optional tools are missing — nothing breaks, you 
    - `/setup-engine godot 4.6` — configure your engine if you already know
    - `/project-stage-detect` — analyze an existing project
 
-For Codex-specific details, see [docs/CODEX-SETUP.md](docs/CODEX-SETUP.md).
+For Codex and Codex CLI details, see [docs/CODEX-SETUP.md](docs/CODEX-SETUP.md).
 
 ## Upgrading
 
@@ -175,7 +183,7 @@ versions, and which files are safe to overwrite vs. which need a manual merge.
 ## Project Structure
 
 ```
-AGENTS.md                           # Codex entrypoint
+AGENTS.md                           # Codex / CodeX entrypoint
 CLAUDE.md                           # Claude entrypoint
 .agents/plugins/marketplace.json    # Repo-local Codex plugin registry
 .claude/
@@ -191,7 +199,7 @@ CLAUDE.md                           # Claude entrypoint
     setup-requirements.md           # Prerequisites and platform notes
     templates/                      # 28 document templates
 plugins/
-  codex-game-studios/              # Codex plugin packaging for the same 37 commands
+  codex-game-studios/              # Codex-compatible plugin packaging for the same 37 commands
 tools/
   codex/                           # Codex sync/install scripts
 src/                                # Game source code

@@ -1,11 +1,12 @@
-# Claude Code Game Studios -- Complete Workflow Guide
+# CodeX Game Studios -- Complete Workflow Guide
 
 > **How to go from zero to a shipped game using the Agent Architecture.**
 >
 > This guide walks you through every phase of game development using the
 > 48-agent system, 37 slash commands, and automated hooks. It assumes you
 > have Codex or Claude Code installed and are working from the project root.
-> If you are using Codex, run the sync step in `docs/CODEX-SETUP.md` first.
+> In this repository, `Codex` means support for both CodeX and `Codex CLI`.
+> If you are using `Codex CLI`, run the sync step in `docs/CODEX-SETUP.md` first.
 
 ---
 
@@ -34,7 +35,7 @@
 
 Before you start, make sure you have:
 
-- **Claude Code** installed and working
+- **Codex CLI** or **Claude Code** installed and working
 - **Git** with Git Bash (Windows) or standard terminal (Mac/Linux)
 - **jq** (optional but recommended -- hooks fall back to `grep` if missing)
 - **Python 3** (optional -- some hooks use it for JSON validation)
@@ -62,9 +63,9 @@ a game concept and engine decision.
 
 ### Step 0.3: Choose Your Engine
 
-Run `/setup-engine` in Claude Code. This is the single most important
-configuration step -- it tells every agent what engine, language, and toolchain
-you're using:
+Run `/setup-engine` in Codex CLI, another Codex-compatible client, or Claude
+Code. This is the single most important configuration step -- it tells every
+agent what engine, language, and toolchain you're using:
 
 ```bash
 /setup-engine godot 4.6
@@ -93,7 +94,7 @@ but won't be primary.
 
 ### Step 0.3: Verify Hooks Are Working
 
-Start a new Claude Code session. You should see output from the
+Start a new Codex CLI or Claude Code session. You should see output from the
 `session-start.sh` hook:
 
 ```
@@ -210,7 +211,7 @@ Agent: [Creates structured concept document with top ideas, target audience,
 Take the brainstorm output and formalize it. Use the **game concept template**:
 
 ```
-Ask Claude to create a game concept document using the template at
+Ask Codex or Claude to create a game concept document using the template at
 .claude/docs/templates/game-concept.md
 ```
 
@@ -229,7 +230,7 @@ Before you go further, lock in your **game pillars** -- the 3-5 non-negotiable
 design values that guide every decision. Use the template:
 
 ```
-Ask Claude to create a game pillars document using the template at
+Ask Codex or Claude to create a game pillars document using the template at
 .claude/docs/templates/game-pillars.md
 ```
 
@@ -290,7 +291,7 @@ For each major system in your game, create a design document in `design/gdd/`.
 Use the template:
 
 ```
-Ask Claude to create a GDD using the template at
+Ask Codex or Claude to create a GDD using the template at
 .claude/docs/templates/game-design-document.md
 ```
 
@@ -475,7 +476,7 @@ Agent: [Creates comprehensive ADR]
 Define your project milestones using the template:
 
 ```
-Ask Claude to create a milestone definition using the template at
+Ask Codex or Claude to create a milestone definition using the template at
 .claude/docs/templates/milestone-definition.md
 ```
 
@@ -651,13 +652,13 @@ Agent: [Creates sprint plan with goal, categorized tasks, 20hr capacity estimate
 Each session follows this pattern:
 
 ```
-1. Start a Claude Code session
+1. Start a Codex CLI or Claude Code session
    (session-start hook shows branch, sprint status, recent commits)
 
 2. Pick a task from the sprint plan
    ("I'm working on the combat damage calculation system")
 
-3. Claude identifies the right agent(s) to help
+3. Your Codex or Claude session identifies the right agent(s) to help
    - game-designer if the design needs work
    - gameplay-programmer for implementation
    - systems-designer for formula details
@@ -1612,7 +1613,7 @@ This bypasses normal sprint processes with a full audit trail:
 After launch dust settles:
 
 ```
-Ask Claude to create a post-mortem using the template at
+Ask Codex or Claude to create a post-mortem using the template at
 .claude/docs/templates/post-mortem.md
 ```
 

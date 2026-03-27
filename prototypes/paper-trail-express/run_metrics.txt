@@ -1,0 +1,6 @@
+recommendation=PROCEED
+elapsed_time=3.48
+drawing_time=3.48
+boost_time=3.48
+eraser_contacts=0
+stamps_collected=3

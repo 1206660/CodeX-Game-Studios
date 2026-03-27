@@ -3,6 +3,10 @@
 This fork keeps the original Claude command names but adds Codex-native entry
 points so the same workflows can be used from Codex.
 
+In this repository, `Codex` means support for both CodeX and `Codex CLI`.
+When a step is specific to the terminal client, the docs say `Codex CLI`
+explicitly.
+
 ## What Was Added
 
 - `AGENTS.md` as the Codex project entrypoint
@@ -28,7 +32,7 @@ bash ./tools/codex/sync-codex.sh
 
 ## Install Into User Codex Skills
 
-If you want the commands to be available from your personal Codex skill
+If you want the commands to be available from your personal `Codex CLI` skill
 directory as well, run:
 
 ```powershell
@@ -46,7 +50,8 @@ when `CODEX_HOME` is not set.
 
 ## Using The Commands
 
-After syncing, restart Codex if the command list does not refresh immediately.
+After syncing, restart `Codex CLI` or your Codex-compatible client if the
+command list does not refresh immediately.
 
 The slash commands stay unchanged:
 
@@ -63,5 +68,5 @@ The slash commands stay unchanged:
 
 - `CLAUDE.md` is still kept for Claude compatibility.
 - `.claude/settings.json` and Claude hooks remain in the repo for Claude users.
-- Codex uses `AGENTS.md` plus the plugin/user skill mirror instead of
-  `claude`-specific settings.
+- Codex-compatible clients use `AGENTS.md` plus the plugin/user skill mirror
+  instead of `claude`-specific settings.

@@ -1,31 +1,28 @@
-# Godot Engine — Version Reference
+# Godot - Version Reference
 
 | Field | Value |
 |-------|-------|
-| **Engine Version** | Godot 4.6 |
-| **Release Date** | January 2026 |
-| **Project Pinned** | 2026-02-12 |
-| **Last Docs Verified** | 2026-02-12 |
+| **Engine Version** | 4.6.1 Stable Mono |
+| **Executable** | `D:\Godot_v4.6.1\Godot_v4.6.1-stable_mono_win64.exe` |
+| **Local Verification** | `--version` returned `4.6.1.stable.mono.official.14d19694e` on 2026-03-28 |
+| **Pinned** | 2026-03-28 |
 | **LLM Knowledge Cutoff** | May 2025 |
+| **Risk Level** | HIGH - project is pinned beyond the safe 4.3-era Godot knowledge baseline |
 
-## Knowledge Gap Warning
+## Why This Matters
 
-The LLM's training data likely covers Godot up to ~4.3. Versions 4.4, 4.5,
-and 4.6 introduced significant changes that the model does NOT know about.
-Always cross-reference this directory before suggesting Godot API calls.
+Godot 4.6.1 is newer than the model's safe native recall window. Before suggesting
+engine APIs, agents should consult the reference files in this directory instead
+of relying on memory alone.
 
-## Post-Cutoff Version Timeline
+## Required Read Order For Godot Work
 
-| Version | Release | Risk Level | Key Theme |
-|---------|---------|------------|-----------|
-| 4.4 | ~Mid 2025 | MEDIUM | Jolt physics option, FileAccess return types, shader texture type changes |
-| 4.5 | ~Late 2025 | HIGH | Accessibility (AccessKit), variadic args, @abstract, shader baker, SMAA |
-| 4.6 | Jan 2026 | HIGH | Jolt default, glow rework, D3D12 default on Windows, IK restored |
+1. `docs/engine-reference/godot/deprecated-apis.md`
+2. `docs/engine-reference/godot/breaking-changes.md`
+3. `docs/engine-reference/godot/current-best-practices.md`
+4. `docs/engine-reference/godot/modules/rendering.md`
+5. `docs/engine-reference/godot/modules/scripting.md`
 
-## Verified Sources
+## Last Verified
 
-- Official docs: https://docs.godotengine.org/en/stable/
-- 4.5→4.6 migration: https://docs.godotengine.org/en/stable/tutorials/migrating/upgrading_to_godot_4.6.html
-- 4.4→4.5 migration: https://docs.godotengine.org/en/stable/tutorials/migrating/upgrading_to_godot_4.5.html
-- Changelog: https://github.com/godotengine/godot/blob/master/CHANGELOG.md
-- Release notes: https://godotengine.org/releases/4.6/
+2026-03-28
